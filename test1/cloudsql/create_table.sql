@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS Prison
   male int,
   female int,
   total int,
+  capacity int,
   rating int,
   PRIMARY KEY (ID)
 );
