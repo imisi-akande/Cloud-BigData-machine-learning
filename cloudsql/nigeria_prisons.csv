@@ -1,0 +1,38 @@
+S/N,State,Number of Prisons,Male ,Female,Total,Maximum capacity
+1,Abia,6,1225,41,1266,fair
+2,Adamawa,17,1972,13,1985,good
+3,Akwa Ibom,5,1094,34,1128,good
+4,Anambra ,3,1415,45,1460,poor
+5,Bauchi,13,961,13,974,poor
+6,Bayelsa,0,0,0,0,N/A
+7,Benue,3,1451,28,1479,fair
+8,Borno,15,1079,10,1089,good
+9,Cross River,6,982,17,999,good
+10,Delta,5,1681,44,1725,poor
+11,Ebonyi,2,880,21,901,poor
+12,Edo,6,1837,44,1881,fair
+13,Ekiti,1,302,8,310,fair
+14,Enugu,4,1985,42,2027,poor
+15,Gombe,5,882,8,890,fair
+16,Imo,3,1966,45,2011,poor
+17,Jigawa,10,661,5,666,good
+18,Kaduna,15,1871,12,1883,good
+19,Kano,10,2821,25,2846,poor
+20,Katsina,11,1239,22,1261,good
+21,Kebbi,10,1145,21,1166,good
+22,Kogi,6,429,5,434,good
+23,Kwara,4,604,2,606,fair
+24,Lagos,5,5140,184,5324,poor
+25,Nassarawa,4,898,17,915,fair
+26,Niger,8,1374,19,1393,good
+27,Ogun,7,1933,34,1967,poor
+28,Ondo,5,893,14,907,fair
+29,Osun,2,605,11,616,good
+30,Oyo,3,895,13,908,fair
+31,Plateau,7,860,8,868,good
+32,Rivers,4,3302,60,3362,poor
+33,Sokoto,5,888,5,893,fair
+34,Taraba,12,1123,13,1136,good
+35,Yobe,8,607,5,612,good
+36,Zamfara,5,588,16,604,good
+37,"FCT, Abuja",3,942,17,959,fair
