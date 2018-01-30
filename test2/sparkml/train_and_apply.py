@@ -50,13 +50,13 @@ print("trained ...")
 
 # use this model to predict what a person would rate prisons that she has not rated
 allPredictions = None
-for USER_ID in xrange(0, 38):
-  dfUserRatings = dfRates.filter(dfRates.personId == USER_ID).rdd.map(lambda r: r.prisonId).collect()
-  rddPotential  = dfPrison.rdd.filter(lambda x: x[0] not in dfUserRatings)
-  pairsPotential = rddPotential.map(lambda x: (USER_ID, x[0]))
+for PERSON_ID in xrange(0, 38):
+  dfPersonRatings = dfRates.filter(dfRates.personId == PERSON_ID).rdd.map(lambda r: r.prisonId).collect()
+  rddPotential  = dfPrison.rdd.filter(lambda x: x[0] not in dfPersonRatings)
+  pairsPotential = rddPotential.map(lambda x: (PERSON_ID, x[0]))
   predictions = model.predictAll(pairsPotential).map(lambda p: (str(p[0]), str(p[1]), float(p[2])))
-  predictions = predictions.takeOrdered(3, key=lambda x: -x[2]) # top 5
-  print("predicted for user={0}".format(USER_ID))
+  predictions = predictions.takeOrdered(5, key=lambda x: -x[2]) # top 5
+  print("predicted for person={0}".format(PERSON_ID))
   if (allPredictions == None):
     allPredictions = predictions
   else:
