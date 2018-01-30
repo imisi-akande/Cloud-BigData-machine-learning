@@ -39,24 +39,24 @@ jdbcUrl    = 'jdbc:mysql://%s:3306/%s?user=%s&password=%s' % (CLOUDSQL_INSTANCE_
 # checkpointing helps prevent stack overflow errors
 sc.setCheckpointDir('checkpoint/')
 
-# Read the ratings and states prison data from Cloud SQL
+# Read the ratings and prisons data from Cloud SQL
 dfRates = sqlContext.read.format('jdbc').options(driver=jdbcDriver, url=jdbcUrl, dbtable='Rating', useSSL='false').load()
-dfAccos = sqlContext.read.format('jdbc').options(driver=jdbcDriver, url=jdbcUrl, dbtable='Prison', useSSL='false').load()
+dfPrison = sqlContext.read.format('jdbc').options(driver=jdbcDriver, url=jdbcUrl, dbtable='Prison', useSSL='false').load()
 print("read ...")
 
 # train the model
 model = ALS.train(dfRates.rdd, 20, 20) # you could tune these numbers, but these are reasonable choices
 print("trained ...")
 
-# use this model to predict what the person would rate accommodations that she has not rated
+# use this model to predict what a person would rate prisons that she has not rated
 allPredictions = None
-for PERSON_ID in xrange(0, 100):
-  dfPersonRatings = dfRates.filter(dfRates.personId == PERSON_ID).rdd.map(lambda r: r.accoId).collect()
-  rddPotential  = dfAccos.rdd.filter(lambda x: x[0] not in dfPersonRatings)
-  pairsPotential = rddPotential.map(lambda x: (PERSON_ID, x[0]))
+for USER_ID in xrange(0, 100):
+  dfUserRatings = dfRates.filter(dfRates.personId == USER_ID).rdd.map(lambda r: r.prisonId).collect()
+  rddPotential  = dfPrison.rdd.filter(lambda x: x[0] not in dfUserRatings)
+  pairsPotential = rddPotential.map(lambda x: (USER_ID, x[0]))
   predictions = model.predictAll(pairsPotential).map(lambda p: (str(p[0]), str(p[1]), float(p[2])))
   predictions = predictions.takeOrdered(5, key=lambda x: -x[2]) # top 5
-  print("predicted for person={0}".format(PERSON_ID))
+  print("predicted for user={0}".format(USER_ID))
   if (allPredictions == None):
     allPredictions = predictions
   else:
